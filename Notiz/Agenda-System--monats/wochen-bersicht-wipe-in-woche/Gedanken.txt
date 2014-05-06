@@ -1,0 +1,20 @@
+Notiz/Agenda System:
+-monats/wochenübersicht wipe in woche/monat danach
+-tag - fach - stunde - typ - thema
+-trotzdem anzeige der Fächer
+-integration in stundenplan?
+-Kalender?
+
+Planer:
+-Wochenübersicht
+-Fächer
+-Räume
+-Zeit
+-Lehrer
+--Vertretung
+---anderer Raum
+---anderer Lehrer
+---anderes Fach
+---kombination?
+
+App:?
