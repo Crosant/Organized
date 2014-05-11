@@ -2,8 +2,8 @@
 <?php
 //require_once 'sql.php';
 require_once  DIR_ROOT.'/classes/user.class.php';
-$date = date('D d.F.Y (W' ,time()).'. Kalenderweek)' ;
-$week = date('W' ,time()).'. Kalenderweek)' ;
+$date = date('D d.F.Y (W' ,time()).'. Kalenderwoche)' ;
+$week = date('W' ,time()).'. Kalenderwoche)' ;
 $login = true;
 $mode = 0;
 ?>
