@@ -2,8 +2,8 @@
 <?php
 //require_once 'sql.php';
 require_once  DIR_ROOT.'/classes/user.class.php';
-$datum = date('D d.F.Y (W' ,time()).'. Kalenderwoche)' ;
-$woche = date('W' ,time()).'. Kalenderwoche)' ;
+$date = date('D d.F.Y (W' ,time()).'. Kalenderweek)' ;
+$week = date('W' ,time()).'. Kalenderweek)' ;
 $login = true;
 $mode = 0;
 ?>
@@ -13,8 +13,8 @@ $mode = 0;
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php
-    if($mode == 1) echo '<title> Vertretungsplan'. $klasse .' vom '. $datum.' </title>';
-    elseif($mode == 0) echo '<title> Stundenplan '. $klasse .' ('. $woche.' </title>';
+    if($mode == 1) echo '<title> Vertretungsplan'. $class .' vom '. $date.' </title>';
+    elseif($mode == 0) echo '<title> Stundenplan '. $class .' ('. $week.' </title>';
     ?>
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
