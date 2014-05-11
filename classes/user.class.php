@@ -1,8 +1,8 @@
 <?php
-class user
+class User
 {
     private $Name = "";
-    private ${'Class'} = "";
+    private $Class = "";
 	protected $LoggedIn = false;
     
 	public function __construct()
