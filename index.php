@@ -3,4 +3,6 @@
 	require_once  DIR_ROOT.'/classes/user.class.php';
 	$user = new User();
 	include 'inc/header.inc.php';
+	include 'inc/footer.inc.php';
+	
 ?>

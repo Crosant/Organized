@@ -5,6 +5,7 @@ require_once  DIR_ROOT.'/classes/user.class.php';
 $date = date('D d.F.Y (W' ,time()).'. Kalenderwoche)' ;
 $week = date('W' ,time()).'. Kalenderwoche)' ;
 $login = true;
+$class = "";
 $mode = 0;
 ?>
 <html lang="de">
@@ -16,8 +17,6 @@ $mode = 0;
     if($mode == 1) echo '<title> Vertretungsplan'. $class .' vom '. $date.' </title>';
     elseif($mode == 0) echo '<title> Stundenplan '. $class .' ('. $week.' </title>';
     ?>
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -25,7 +24,12 @@ $mode = 0;
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <?php include 'custom.style.inc.php'; ?>
+  
+    <!-- Bootstrap -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
   </head>
+
   <body>
   
       <!-- Fixed navbar -->
@@ -67,6 +71,6 @@ $mode = 0;
       </div>
     </div>
 	    <div class="container">
-
-      <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron">
+			<div class="wrap">
+			<!-- Main component for a primary marketing message or call to action -->
+				<div class="jumbotron">
