@@ -3,9 +3,11 @@ class Calendar
 {
 	private $user = '';
 	private $mode = '';
+	private $pdo  = null;
 	
-	public function __construct($user, $mode)
+	public function __construct($pdo, $user, $mode)
 	{
+		$this->pdo  = $pdo;
 		$this->user = $user;
 		$this->mode = $mode;
 	}
@@ -15,7 +17,7 @@ class Calendar
 		if($this->mode == 1)
 		{
         $tbl_name=$this->user->getClass() ."_Vertretung";
-        echo '<h2 class="sub-header"> Vertretungsplan '. $this->user->getClass() .' vom '. $datum . ' </h2>
+        echo '<h2 class="sub-header"> Vertretungsplan '. $this->user->getClass() .' vom '. $date . ' </h2>
         <div class="table-responsive">
         <table class="table table-striped">
         <thead>
@@ -36,7 +38,7 @@ class Calendar
     elseif ($this->mode == 0)
 	{
         $tbl_name=$this->user->getClass() ."_stundenplan";
-        echo '<h2 class="sub-header"> Stundenplan '. $this->user->getClass() .' ('. $woche . ' </h2>
+        echo '<h2 class="sub-header"> Stundenplan '. $this->user->getClass() .' ('. $week . ' </h2>
         <div class="table-responsive">
         <table class="table table-striped">
         <thead>
@@ -53,7 +55,7 @@ class Calendar
         <tbody>';
         try{
 			$sql = "SELECT * FROM `".$tbl_name."`s";
-			$stmt = $pdo->prepare($sql);
+			$stmt = $this->pdo->prepare($sql);
 			$stmt->execute();
 			$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			foreach($results as $row){
