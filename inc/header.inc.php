@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <?php
-//require_once 'sql.php';
+require_once 'sql.inc.php';
+require_once 'funktions.inc.php';
 require_once  DIR_ROOT.'/classes/user.class.php';
 $date = date('D d.F.Y (W' ,time()).'. Kalenderwoche)' ;
 $week = date('W' ,time()).'. Kalenderwoche)' ;
 $login = true;
-$class = "";
+$class = $user->getClass();
 $mode = 0;
 ?>
 <html lang="de">
