@@ -3,8 +3,9 @@
 require_once 'sql.inc.php';
 require_once 'functions.inc.php';
 require_once  DIR_ROOT.'/classes/user.class.php';
-$date = date('D d.F.Y (W' ,time()).'. Kalenderwoche)' ;
-$week = date('W' ,time()).'. Kalenderwoche)' ;
+$date = date('D d.F.Y',time());
+$week = date('W' ,time());
+$year = date('Y' ,time());
 $login = true;
 $class = $user->getClass();
 $mode = 0;
@@ -16,7 +17,7 @@ $mode = 0;
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php
     if($mode == 1) echo '<title> Vertretungsplan'. $class .' vom '. $date.' </title>';
-    elseif($mode == 0) echo '<title> Stundenplan '. $class .' ('. $week.' </title>';
+    elseif($mode == 0) echo '<title> Stundenplan '. $class .' ('. $week.'. Kalenderwoche) </title>';
     ?>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

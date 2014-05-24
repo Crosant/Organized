@@ -4,7 +4,7 @@
 	$user = new User();
 	include 'inc/header.inc.php';
 	include 'classes/calendar.class.php';
-	$calendar = new Calendar($pdo, $user, 0); 
+	$calendar = new Calendar($pdo, $user, 1); 
 	$calendar->show();
 	include 'inc/footer.inc.php';
 	
