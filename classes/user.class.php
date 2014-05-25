@@ -8,7 +8,7 @@ class User
 	public function __construct()
 	{
 		$this->setName("Guest");
-		$this->setClass("Example");
+		$this->setClass("example");
 		$this->logout();
 	}
 	
