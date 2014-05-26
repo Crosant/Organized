@@ -41,17 +41,16 @@ class Calendar
 			$stmt->execute();
 			$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			$stamp = getStampFromWeek($week, $year);
-			$montag = date('Y.m.d', $stamp);
-			$dienstag = date('Y.m.d', $stamp + 24*60*60);
-			$mittwoch = date('Y.m.d', $stamp + 24*60*60*2);
-			$donnerstag = date('Y.m.d', $stamp + 24*60*60*3);
-			$freitag = date('Y.m.d', $stamp + 24*60*60*4);
-			echo $montag;
-        	$tbl_name=$this->user->getClass() ."_vertretung";
-        	$sql = "SELECT * FROM `".$tbl_name."`s";
-			$stmt = $this->pdo->prepare($sql);
-			$stmt->execute();
-			$results2 = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			$montag = date('Y-m-d', $stamp);
+			$dienstag = date('Y-m-d', $stamp + 24*60*60);
+			$mittwoch = date('Y-m-d', $stamp + 24*60*60*2);
+			$donnerstag = date('Y-m-d', $stamp + 24*60*60*3);
+			$freitag = date('Y-m-d', $stamp + 24*60*60*4);
+        	$tbl_name2=$this->user->getClass() ."_vertretung";
+        	$sql2 = "SELECT * FROM `".$tbl_name2."`s";
+			$stmt2 = $this->pdo->prepare($sql2);
+			$stmt2->execute();
+			$results2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
 			
 			foreach($results as $row){
 				array_walk_recursive($row, 'encode_items');
@@ -59,58 +58,68 @@ class Calendar
 				echo '<td>'.$row['Stunde'].'</td>';
 				echo '<td>'.$row['Zeit'].'</td>';
 				echo '<td>'.$row['Montag'];
-				foreach($results as $row2){
-					 if($row2['Tag'] == $montag){
+				foreach($results2 as $row2){
+					 if(array_key_exists('Tag', $row2)){
+					  if($row2['Tag'] == $montag){
 					 	if($row['Stunde'] == $row2['Stunde']){
 					 		if(!$row2['Entfall'])
 					 		echo '</br> <font size="-2">'.$row2['Fach']. '</br>'.$row2['Lehrer']. '</br>'.$row2['Anmerkung']. '</br>';
-					 		else echo '<font size="+1"> Entfall';
+					 		else echo '</br> <font size="+1" color="red"> Entfall';
 					 	}
 					}
+				   }
 				}
 				echo '</font> </td>';
 				echo '<td>'.$row['Dienstag'];
-				foreach($results as $row2){
-					 if($row2['Tag'] == $dienstag){
-					 					 	if($row['Stunde'] == $row2['Stunde']){
+				foreach($results2 as $row2){
+					 if(array_key_exists('Tag', $row2)){
+					  if($row2['Tag'] == $dienstag){
+					  	if($row['Stunde'] == $row2['Stunde']){
 					 		if(!$row2['Entfall'])
 					 		echo '</br> <font size="-2">'.$row2['Fach']. '</br>'.$row2['Lehrer']. '</br>'.$row2['Anmerkung']. '</br>';
-					 		else echo '<font size="+1"> Entfall';
+					 		else echo '</br> <font size="+1" color="red"> Entfall';
 					 	}
 					 }
+					}
 				}
 				echo '</font> </td>';
 				echo '<td>'.$row['Mittwoch'];
-				foreach($results as $row2){
-					 if($row2['Tag'] == $mittwoch){
-					 					 	if($row['Stunde'] == $row2['Stunde']){
+				foreach($results2 as $row2){
+					 if(array_key_exists('Tag', $row2)){
+					  if($row2['Tag'] == $mittwoch){
+					  	if($row['Stunde'] == $row2['Stunde']){
 					 		if(!$row2['Entfall'])
 					 		echo '</br> <font size="-2">'.$row2['Fach']. '</br>'.$row2['Lehrer']. '</br>'.$row2['Anmerkung']. '</br>';
-					 		else echo '<font size="+1"> Entfall';
+					 		else echo '</br> <font size="+1" color="red"> Entfall';
 					 	}
 					 }
+					}
 				}
 				echo '</font> </td>';
 				echo '<td>'.$row['Donnerstag'];
-				foreach($results as $row2){
-					 if($row2['Tag'] == $donnerstag){
-					 					 	if($row['Stunde'] == $row2['Stunde']){
+				foreach($results2 as $row2){
+					 if(array_key_exists('Tag', $row2)){
+					  if($row2['Tag'] == $donnerstag){
+					  	if($row['Stunde'] == $row2['Stunde']){
 					 		if(!$row2['Entfall'])
 					 		echo '</br> <font size="-2">'.$row2['Fach']. '</br>'.$row2['Lehrer']. '</br>'.$row2['Anmerkung']. '</br>';
-					 		else echo '<font size="+1"> Entfall';
+					 		else echo '</br> <font size="+1" color="red"> Entfall';
 					 	}
 					 }
+					}
 				}
 				echo '</font> </td>';
 				echo '<td>'.$row['Freitag'];
-				foreach($results as $row2){
-					 if($row2['Tag'] == $freitag){
-					 					 	if($row['Stunde'] == $row2['Stunde']){
+				foreach($results2 as $row2){
+					 if(array_key_exists('Tag', $row2)){
+					  if($row2['Tag'] == $freitag){
+					  	if($row['Stunde'] == $row2['Stunde']){
 					 		if(!$row2['Entfall'])
 					 		echo '</br> <font size="-2">'.$row2['Fach']. '</br>'.$row2['Lehrer']. '</br>'.$row2['Anmerkung']. '</br>';
-					 		else echo '<font size="+1"> Entfall';
+					 		else echo '</br> <font size="+1" color="red"> Entfall';
 					 	}
 					 }
+					}
 				}
 				echo '</font> </td>';
 				echo '</tr>';
