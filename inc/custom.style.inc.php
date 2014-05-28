@@ -2,14 +2,17 @@
 	/* Sticky footer styles
 	 -------------------------------------------------- */
 	html {
+		
 		position: relative;
 		min-height: 100%;
 	}
 	body {
+		
 		/* Margin bottom by footer height */
 		margin-bottom: 60px;
 	}
 	#footer {
+		
 		position: absolute;
 		bottom: 0;
 		width: 100%;
@@ -19,9 +22,15 @@
 	}
 
 	#vertretung {
-
-		font-size: -2;
+		
+		font-size: 90%;
 		color: green;
+	}
+
+	#entfall {
+
+		font-size: 110%;
+		color: red;
 	}
 
 </style>

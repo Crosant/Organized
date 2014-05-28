@@ -59,70 +59,70 @@ class Calendar {
 							if ($row2['Tag'] == $montag) {
 								if ($row['Stunde'] == $row2['Stunde']) {
 									if (!$row2['Entfall'])
-										echo '</br> <font size="-2">' . $row2['Fach'] . '</br>' . $row2['Lehrer'] . '</br>' . $row2['Anmerkung'] . '</br>';
+										echo '</br> <div id="vertretung">' . $row2['Fach'] . '</br>' . $row2['Lehrer'] . '</br>' . $row2['Anmerkung'] . ' </div></br>';
 									else
-										echo '</br> <font size="+1" color="red"> Entfall';
+										echo '</br> <div id="entfall"> Entfall </div>';
 								}
 							}
 						}
 					}
-					echo '</font> </td>';
+					echo '</td>';
 					echo '<td>' . $row['Dienstag'];
 					foreach ($results2 as $row2) {
 						if (array_key_exists('Tag', $row2)) {
 							if ($row2['Tag'] == $dienstag) {
 								if ($row['Stunde'] == $row2['Stunde']) {
 									if (!$row2['Entfall'])
-										echo '</br> <font size="-2">' . $row2['Fach'] . '</br>' . $row2['Lehrer'] . '</br>' . $row2['Anmerkung'] . '</br>';
+										echo '</br> <div id="vertretung">' . $row2['Fach'] . '</br>' . $row2['Lehrer'] . '</br>' . $row2['Anmerkung'] . ' </div></br>';
 									else
-										echo '</br> <font size="+1" color="red"> Entfall';
+										echo '</br> <div id="entfall"> Entfall </div>';
 								}
 							}
 						}
 					}
-					echo '</font> </td>';
+					echo '</td>';
 					echo '<td>' . $row['Mittwoch'];
 					foreach ($results2 as $row2) {
 						if (array_key_exists('Tag', $row2)) {
 							if ($row2['Tag'] == $mittwoch) {
 								if ($row['Stunde'] == $row2['Stunde']) {
 									if (!$row2['Entfall'])
-										echo '</br> <font size="-2">' . $row2['Fach'] . '</br>' . $row2['Lehrer'] . '</br>' . $row2['Anmerkung'] . '</br>';
+										echo '</br> <div id="vertretung">' . $row2['Fach'] . '</br>' . $row2['Lehrer'] . '</br>' . $row2['Anmerkung'] . ' </div></br>';
 									else
-										echo '</br> <font size="+1" color="red"> Entfall';
+										echo '</br> <div id="entfall"> Entfall </div>';
 								}
 							}
 						}
 					}
-					echo '</font> </td>';
+					echo '</td>';
 					echo '<td>' . $row['Donnerstag'];
 					foreach ($results2 as $row2) {
 						if (array_key_exists('Tag', $row2)) {
 							if ($row2['Tag'] == $donnerstag) {
 								if ($row['Stunde'] == $row2['Stunde']) {
 									if (!$row2['Entfall'])
-										echo '</br> <font size="-2">' . $row2['Fach'] . '</br>' . $row2['Lehrer'] . '</br>' . $row2['Anmerkung'] . '</br>';
+										echo '</br> <div id="vertretung">' . $row2['Fach'] . '</br>' . $row2['Lehrer'] . '</br>' . $row2['Anmerkung'] . ' </div></br>';
 									else
-										echo '</br> <font size="+1" color="red"> Entfall';
+										echo '</br> <div id="entfall"> Entfall </div>';
 								}
 							}
 						}
 					}
-					echo '</font> </td>';
+					echo '</td>';
 					echo '<td>' . $row['Freitag'];
 					foreach ($results2 as $row2) {
 						if (array_key_exists('Tag', $row2)) {
 							if ($row2['Tag'] == $freitag) {
 								if ($row['Stunde'] == $row2['Stunde']) {
 									if (!$row2['Entfall'])
-										echo '</br> <font size="-2">' . $row2['Fach'] . '</br>' . $row2['Lehrer'] . '</br>' . $row2['Anmerkung'] . '</br>';
+										echo '</br> <div id="vertretung">' . $row2['Fach'] . '</br>' . $row2['Lehrer'] . '</br>' . $row2['Anmerkung'] . ' </div></br>';
 									else
-										echo '</br> <font size="+1" color="red"> Entfall';
+										echo '</br> <div id="entfall"> Entfall </div>';
 								}
 							}
 						}
 					}
-					echo '</font> </td>';
+					echo '</td>';
 					echo '</tr>';
 				}
 			} catch(PDOException $e) {
