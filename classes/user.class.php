@@ -1,45 +1,42 @@
 <?php
-class User
-{
-    private $Name = "";
-    private $Class = "";
+class User {
+	private $Name = "";
+	private $Class = "";
 	protected $LoggedIn = false;
-    
-	public function __construct()
-	{
-		$this->setName("Guest");
-		$this->setClass("example");
-		$this->logout();
+
+	public function __construct() {
+		$this -> setName("Guest");
+		$this -> setClass("example");
+		$this -> logout();
 	}
-	
-	public function getName()
-	{
-		return $this->name;
+
+	public function getName() {
+		return $this -> name;
 	}
-	public function getClass()
-	{
-		return $this->{'Class'};
+
+	public function getClass() {
+		return $this -> {'Class'};
 	}
-	public function getLoggedIn()
-	{
-		return $this->LoggedIn;
+
+	public function getLoggedIn() {
+		return $this -> LoggedIn;
 	}
-	
-	public function setName($name)
-	{
-		return $this->name = $name;
+
+	public function setName($name) {
+		return $this -> name = $name;
 	}
-	public function setClass($class)
-	{
-		return $this->{'Class'} = $class;
+
+	public function setClass($class) {
+		return $this -> {'Class'} = $class;
 	}
-	public function login()
-	{
-		return $this->LoggedIn = true;
+
+	public function login() {
+		return $this -> LoggedIn = true;
 	}
-	public function logout()
-	{
-		return $this->LoggedIn = false;
-	}	
+
+	public function logout() {
+		return $this -> LoggedIn = false;
+	}
+
 }
 ?>
