@@ -1,8 +1,8 @@
-Notiz/Agenda System:
--monats/wochenübersicht wipe in woche/monat danach
--tag - fach - stunde - typ - thema
--trotzdem anzeige der Fächer
--integration in stundenplan?
+Notiz/Agenda System (Organized):
+-Monats-/Wochenübersicht -> Wipe in Woche/Monat danach
+-Tag - Fach - Stunde - Typ - Thema
+-Trotzdem Anzeige der Fächer
+-Integration in Stundenplan?
 -Kalender?
 
 Planer:
@@ -15,8 +15,21 @@ Planer:
 ---anderer Raum
 ---anderer Lehrer
 ---anderes Fach
----kombination?
+---Kombination?
 
 App:?
 
 Notifications:?
+
+---
+
+Phase 1: Organized (aka Agenda System) alleinstehend und manuell zu bedienen
+ETA Phase 1: Bis KW 33/2014
+
+Phase 2: Timetabled (aka Adminpanel + SQL Stundenplan) alleinstehend und manuell zu bedienen
+ETA Phase 2: Ende Herbstsemester 2014?
+
+Phase 3: Verknüpfung Organized<->Timetabled (Bsp.: Stundenausfall wird eingetragen -> Aufgaben werden automatisch verschoben)
+ETA Phase 3: Mitte Frühlingssemester 2015?
+
+(Phase 4: Ich dreh das Ganze meiner Schule an ;D)
