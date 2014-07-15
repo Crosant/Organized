@@ -32,4 +32,4 @@ ETA Phase 2: Ende Herbstsemester 2014?
 Phase 3: Verknüpfung Organized<->Timetabled (Bsp.: Stundenausfall wird eingetragen -> Aufgaben werden automatisch verschoben)
 ETA Phase 3: Mitte Frühlingssemester 2015?
 
-(Phase 4: Ich dreh das Ganze meiner Schule an ;D)
+(Phase 4: David dreht das Ganze seiner Schule an ;D)
