@@ -18,6 +18,8 @@ $mode = 0;
 		<?php
 		if ($mode == 1)
 			echo '<title> Vertretungsplan' . $class . ' vom ' . $date . ' </title>';
+		elseif ($mode == 2)
+			echo '<title> Planer ' . $class . ' (' . $week . '. Kalenderwoche) </title>';
 		elseif ($mode == 0)
 			echo '<title> Stundenplan ' . $class . ' (' . $week . '. Kalenderwoche) </title>';
 		?>
