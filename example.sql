@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Server Version:               5.6.17-log - MySQL Community Server (GPL)
+-- Server Version:               5.6.19-log - MySQL Community Server (GPL)
 -- Server Betriebssystem:        Win32
 -- HeidiSQL Version:             8.3.0.4694
 -- --------------------------------------------------------
@@ -11,13 +11,11 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 -- Exportiere Datenbank Struktur für planer
-DROP DATABASE IF EXISTS `planer`;
 CREATE DATABASE IF NOT EXISTS `planer` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `planer`;
 
 
 -- Exportiere Struktur von Tabelle planer.example_stundenplan
-DROP TABLE IF EXISTS `example_stundenplan`;
 CREATE TABLE IF NOT EXISTS `example_stundenplan` (
   `Stunde` int(11) NOT NULL AUTO_INCREMENT,
   `Zeit` varchar(50) NOT NULL,
@@ -27,39 +25,20 @@ CREATE TABLE IF NOT EXISTS `example_stundenplan` (
   `Donnerstag` varchar(50) NOT NULL,
   `Freitag` varchar(50) NOT NULL,
   PRIMARY KEY (`Stunde`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle planer.example_stundenplan: ~9 rows (ungefähr)
-DELETE FROM `example_stundenplan`;
-/*!40000 ALTER TABLE `example_stundenplan` DISABLE KEYS */;
-INSERT INTO `example_stundenplan` (`Stunde`, `Zeit`, `Montag`, `Dienstag`, `Mittwoch`, `Donnerstag`, `Freitag`) VALUES
-	(1, '7:50-8:35', 'Sport', 'Politik', 'Chemie', 'Mathe', 'Mathe'),
-	(2, '8:40-9:25', 'Sport', 'Politik', 'Chemie', 'Mathe', 'Mathe'),
-	(3, '9:40-10:25', 'Musik', 'Religion', 'Erdkunde', 'Deutsch', 'Französisch'),
-	(4, '10:30-11:15', 'Musik', 'Religion', 'Erdkunde', 'Englisch', 'Französisch'),
-	(5, '11:30-12:15', 'Biologie', 'Französisch', 'Physik', 'Kunst', 'Englisch'),
-	(6, '12:20-13:05', 'Biologie', 'Französisch', 'Physik', 'Kunst', 'Englisch'),
-	(7, '13:15-14:00', 'Pause', '-', 'Pause', '-', 'Pause'),
-	(8, '14:05-14:50', 'Geschichte', '-', 'Deutsch', '-', 'Informatik'),
-	(9, '14:50-15:35', 'Geschichte', '-', 'Deutsch', '-', 'Informatik');
-/*!40000 ALTER TABLE `example_stundenplan` ENABLE KEYS */;
+-- Daten Export vom Benutzer nicht ausgewählt
 
 
--- Exportiere Struktur von Tabelle planer.example_vertretung
-DROP TABLE IF EXISTS `example_vertretung`;
-CREATE TABLE IF NOT EXISTS `example_vertretung` (
+-- Exportiere Struktur von Tabelle planer.guest_planer
+CREATE TABLE IF NOT EXISTS `guest_planer` (
   `Tag` date DEFAULT NULL,
-  `Stunde` int(11) DEFAULT NULL,
-  `Fach` varchar(50) DEFAULT NULL,
-  `Lehrer` varchar(50) DEFAULT NULL,
-  `Anmerkung` varchar(50) DEFAULT NULL,
+  `Zeit` varchar(50) DEFAULT NULL,
+  `Inhalt` varchar(50) DEFAULT NULL,
   `Entfall` tinyint(4) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle planer.example_vertretung: ~0 rows (ungefähr)
-DELETE FROM `example_vertretung`;
-/*!40000 ALTER TABLE `example_vertretung` DISABLE KEYS */;
-/*!40000 ALTER TABLE `example_vertretung` ENABLE KEYS */;
+-- Daten Export vom Benutzer nicht ausgewählt
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
