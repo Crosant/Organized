@@ -67,6 +67,8 @@ class Calendar
 
 
                     if($firstRun){
+                        echo '</tr><tr> ';
+                        echo '<td>' . $row['Zeit'] . '</td>';
                         $lasttime = $row['Zeit'];
                         $firstRun = 0;
                     }

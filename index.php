@@ -11,19 +11,20 @@ $calendar->show();
 
 if(isset($_POST['insertB']) && $user->getLoggedIn()) { // Pressed insert button
     $tbl_name = $user->getName() . "_planer";
-    $sql = "INSERT INTO " . $tbl_name . " (Tag,Zeit,Inhalt) VALUES (". $_POST['insert']['date'] .",". $_POST['insert']['time'] .",". $_POST['insert']['thing'] .")";
+    $sql = "INSERT INTO " . $tbl_name . " (Tag,Zeit,Inhalt) VALUES (:1,:2,:3)";
     echo $sql;
     $q = $pdo->prepare($sql);
-    $q->execute();
+    $q->execute(array(':1' => $_POST['insert']['date'],
+                       ':2' => $_POST['insert']['time'],
+                        ':3' => $_POST['insert']['thing']));
 }
-
 if($user->getLoggedIn()){
 echo '
     <form action="' . $_SERVER['PHP_SELF'] . '" method="post" accept-charset="UTF-8">
         <input id="date" style="margin: 5px; margin-bottom: 15px;" type="text" name="insert[date]"
-               placeholder="Tag DD.MM.YYYY" size="30"/>
+               placeholder="Tag YYYY-MM-DD" size="30"/>
         <input id="time" style="margin: 5px; margin-bottom: 15px;" type="text" name="insert[time]"
-               placeholder="Zeit eg. 00:00 - 20:30" size="30"/>
+               placeholder="Zeit eg. 00:00-20:30" size="30"/>
         <input id="thing" style="margin: 5px; margin-bottom: 15px;" type="text" name="insert[thing]"
                placeholder="Inhalt" size="30"/>
 
