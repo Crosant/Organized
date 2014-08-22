@@ -54,7 +54,7 @@ class Calendar
                 $firstRun = 1;
                 foreach ($results as $row) {
                     array_walk_recursive($row, 'encode_items');
-                    if ($lasttime != $row['Zeit']) {
+                    if ($lasttime != $row['Zeit'] && !$firstRun) {
                         echo '</tr><tr> ';
                         echo '<td>' . $row['Zeit'] . '</td>';
                         $setMontag = 0;

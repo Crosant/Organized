@@ -12,11 +12,11 @@ $calendar->show();
 if(isset($_POST['insertB']) && $user->getLoggedIn()) { // Pressed insert button
     $tbl_name = $user->getName() . "_planer";
     $sql = "INSERT INTO " . $tbl_name . " (Tag,Zeit,Inhalt) VALUES (:1,:2,:3)";
-    echo $sql;
     $q = $pdo->prepare($sql);
     $q->execute(array(':1' => $_POST['insert']['date'],
                        ':2' => $_POST['insert']['time'],
                         ':3' => $_POST['insert']['thing']));
+    header("Refresh:0");
 }
 if($user->getLoggedIn()){
 echo '

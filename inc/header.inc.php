@@ -18,7 +18,7 @@ if(isset($_GET['a']) && $_GET['a'] == 'logout') { // Log out
     unset($_SESSION['loggedIn']);
     session_destroy();
         $user->logout();
-		
+    header("Refresh:0");
 }
  
 ?>
