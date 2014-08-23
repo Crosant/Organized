@@ -54,7 +54,7 @@ class Calendar
                 $firstRun = 1;
                 foreach ($results as $row) {
                     array_walk_recursive($row, 'encode_items');
-                    if( $row['Zeit'] == $montag || $row['Zeit'] == $dienstag || $row['Zeit'] == $mittwoch || $row['Zeit'] == $donnerstag || $row['Zeit'] == $freitag)
+                    if( $row['Zeit'] == $montag || $row['Zeit'] == $dienstag || $row['Zeit'] == $mittwoch || $row['Zeit'] == $donnerstag || $row['Zeit'] == $freitag){
                     if ($lasttime != $row['Zeit'] && !$firstRun) {
                         echo '</tr><tr> ';
                         echo '<td>' . $row['Zeit'] . '</td>';
@@ -135,6 +135,7 @@ class Calendar
 
                     $lasttime = $row['Zeit'];
 
+                }
                 }
             } catch (PDOException $e) {
                 echo $e->getMessage();
