@@ -21,7 +21,7 @@ class Calendar
         if ($this->mode == 4) {
             $tbl_name1 = $this->user->getClass() . "_planer";
             $tbl_name2 = $this->user->getName() . "_planer";
-            echo '<h2 class="sub-header"> Planer ' . $this->user->getName() . ' (' . $week . '. Kalenderwoche) </h2>
+            echo '<h2 class="sub-header"> Aufgaben ' . $this->user->getName() . ' (' . $week . '. Kalenderwoche) </h2>
         <div class="table-responsive">
         <table class="table table-striped">
         <thead>
@@ -150,7 +150,7 @@ class Calendar
         </div>';
         }elseif ($this->mode == 3) {
         $tbl_name = $this->user->getClass() . "_planer";
-        echo '<h2 class="sub-header"> Planer ' . $this->user->getName() . ' (' . $week . '. Kalenderwoche) </h2>
+        echo '<h2 class="sub-header"> Aufgaben ' . $this->user->getName() . ' (' . $week . '. Kalenderwoche) </h2>
         <div class="table-responsive">
         <table class="table table-striped">
         <thead>

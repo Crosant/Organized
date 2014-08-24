@@ -6,9 +6,9 @@ require_once DIR_ROOT . 'classes/user.class.php';
 $user = new User($pdo);
 include 'inc/header.inc.php';
 include 'classes/calendar.class.php';
-$calendar = new Calendar($pdo, $user, 4);
-$calendar->show();
 $class = 1;
+$calendar = new Calendar($pdo, $user, 3+$class);
+$calendar->show();
 if(isset($_POST['insertB']) && $user->getLoggedIn()) { // Pressed insert button
     if( $_POST['insert']['class']){
         $tbl_name = $user->getClass() . "_planer";
