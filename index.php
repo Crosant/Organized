@@ -10,7 +10,7 @@ $calendar = new Calendar($pdo, $user, 3);
 $calendar->show();
 $class = 1;
 if(isset($_POST['insertB']) && $user->getLoggedIn()) { // Pressed insert button
-    if($class){
+    if( $_POST['insert']['class']){
         $tbl_name = $user->getClass() . "_planer";
     }
     else {
@@ -32,7 +32,7 @@ echo '
                placeholder="Zeit eg. 00:00-20:30" size="30"/>
         <input id="thing" style="margin: 5px; margin-bottom: 15px;" type="text" name="insert[thing]"
                placeholder="Inhalt" size="30"/>
-
+        <input id="class" style=" margin-right: 10px;" type="checkbox" name="insert[class]" value="1" /> Klasse?
         <input class="btn btn-primary" style="margin: 5px; clear: left; width: 96%; height: 32px; font-size: 13px;"
                type="submit" name="insertB" value="Insert"/>
     </form> ';
