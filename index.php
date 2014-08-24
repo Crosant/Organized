@@ -6,11 +6,16 @@ require_once DIR_ROOT . 'classes/user.class.php';
 $user = new User($pdo);
 include 'inc/header.inc.php';
 include 'classes/calendar.class.php';
-$calendar = new Calendar($pdo, $user, 2);
+$calendar = new Calendar($pdo, $user, 3);
 $calendar->show();
-
+$class = 1;
 if(isset($_POST['insertB']) && $user->getLoggedIn()) { // Pressed insert button
-    $tbl_name = $user->getName() . "_planer";
+    if($class){
+        $tbl_name = $user->getClass() . "_planer";
+    }
+    else {
+        $tbl_name = $user->getName() . "_planer";
+    }
     $sql = "INSERT INTO " . $tbl_name . " (Tag,Zeit,Inhalt) VALUES (:1,:2,:3)";
     $q = $pdo->prepare($sql);
     $q->execute(array(':1' => $_POST['insert']['date'],
