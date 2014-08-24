@@ -6,7 +6,7 @@ require_once DIR_ROOT . 'classes/user.class.php';
 $user = new User($pdo);
 include 'inc/header.inc.php';
 include 'classes/calendar.class.php';
-$calendar = new Calendar($pdo, $user, 3);
+$calendar = new Calendar($pdo, $user, 4);
 $calendar->show();
 $class = 1;
 if(isset($_POST['insertB']) && $user->getLoggedIn()) { // Pressed insert button

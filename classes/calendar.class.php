@@ -18,8 +18,9 @@ class Calendar
         global $week;
         global $date;
         global $year;
-        if ($this->mode == 3) {
-            $tbl_name = $this->user->getClass() . "_planer";
+        if ($this->mode == 4) {
+            $tbl_name1 = $this->user->getClass() . "_planer";
+            $tbl_name2 = $this->user->getName() . "_planer";
             echo '<h2 class="sub-header"> Planer ' . $this->user->getName() . ' (' . $week . '. Kalenderwoche) </h2>
         <div class="table-responsive">
         <table class="table table-striped">
@@ -35,10 +36,13 @@ class Calendar
         </thead>
         <tbody>';
             try {
-                $sql = "SELECT * FROM `" . $tbl_name . "`s ORDER BY Zeit, Tag";
+                $sql = "SELECT * FROM `" . $tbl_name2 . "`s ORDER BY Zeit, Tag;";
+                $sql2 = "SELECT * FROM `" . $tbl_name1 . "`s ORDER BY Zeit, Tag;";
                 $stmt = $this->pdo->prepare($sql);
                 $stmt->execute();
-                $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                $stmt2 = $this->pdo->prepare($sql2);
+                $stmt2->execute();
+                $results = array_merge($stmt->fetchAll(PDO::FETCH_ASSOC),$stmt2->fetchAll(PDO::FETCH_ASSOC));
                 $stamp = getStampFromWeek($week, $year);
                 $montag = date('Y-m-d', $stamp);
                 $dienstag = date('Y-m-d', $stamp + 24 * 60 * 60);
@@ -52,6 +56,7 @@ class Calendar
                 $setDonnerstag = 0;
                 $setFreitag = 0;
                 $firstRun = 1;
+                array_multisort($results);
                 foreach ($results as $row) {
                     array_walk_recursive($row, 'encode_items');
                     if ($row['Tag'] == $montag || $row['Tag'] == $dienstag || $row['Tag'] == $mittwoch || $row['Tag'] == $donnerstag || $row['Tag'] == $freitag) {
@@ -143,7 +148,132 @@ class Calendar
             echo '</tbody>
         </table>
         </div>';
-        } elseif ($this->mode == 2) {
+        }elseif ($this->mode == 3) {
+        $tbl_name = $this->user->getClass() . "_planer";
+        echo '<h2 class="sub-header"> Planer ' . $this->user->getName() . ' (' . $week . '. Kalenderwoche) </h2>
+        <div class="table-responsive">
+        <table class="table table-striped">
+        <thead>
+        <tr>
+        <th>Zeit</th>
+        <th>Montag</th>
+        <th>Dienstag</th>
+        <th>Mittwoch</th>
+        <th>Donnerstag</th>
+        <th>Freitag</th>
+        </tr>
+        </thead>
+        <tbody>';
+        try {
+            $sql = "SELECT * FROM `" . $tbl_name . "`s ORDER BY Zeit, Tag";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute();
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $stamp = getStampFromWeek($week, $year);
+            $montag = date('Y-m-d', $stamp);
+            $dienstag = date('Y-m-d', $stamp + 24 * 60 * 60);
+            $mittwoch = date('Y-m-d', $stamp + 24 * 60 * 60 * 2);
+            $donnerstag = date('Y-m-d', $stamp + 24 * 60 * 60 * 3);
+            $freitag = date('Y-m-d', $stamp + 24 * 60 * 60 * 4);
+            $lasttime = 0;
+            $setMontag = 0;
+            $setDienstag = 0;
+            $setMittwoch = 0;
+            $setDonnerstag = 0;
+            $setFreitag = 0;
+            $firstRun = 1;
+            foreach ($results as $row) {
+                array_walk_recursive($row, 'encode_items');
+                if ($row['Tag'] == $montag || $row['Tag'] == $dienstag || $row['Tag'] == $mittwoch || $row['Tag'] == $donnerstag || $row['Tag'] == $freitag) {
+                    if ($lasttime != $row['Zeit'] && !$firstRun) {
+                        echo '</tr><tr> ';
+                        echo '<td>' . $row['Zeit'] . '</td>';
+                        $setMontag = 0;
+                        $setDienstag = 0;
+                        $setMittwoch = 0;
+                        $setDonnerstag = 0;
+                        $setFreitag = 0;
+                        $lasttime = $row['Zeit'];
+                    }
+
+
+                    if ($firstRun) {
+                        echo '</tr><tr> ';
+                        echo '<td>' . $row['Zeit'] . '</td>';
+                        $lasttime = $row['Zeit'];
+                        $firstRun = 0;
+                    }
+
+
+                    if ($row['Tag'] == $montag && $setMontag != 1) {
+                        echo '<td>' . $row['Inhalt'] . '</td>';
+                        $setMontag = 1;
+                    } elseif ($row['Tag'] == $dienstag && $setDienstag != 1) {
+                        if ($setMontag == 0 && $lasttime == $row['Zeit']) {
+                            echo '<td></td>';
+                            $setMontag = 1;
+                        }
+                        echo '<td>' . $row['Inhalt'] . '</td>';
+                        $setDienstag = 1;
+                    } elseif ($row['Tag'] == $mittwoch && $setMittwoch != 1) {
+                        if ($setMontag == 0 && $lasttime == $row['Zeit']) {
+                            echo '<td></td>';
+                            $setMontag = 1;
+                        }
+                        if ($setDienstag == 0 && $lasttime == $row['Zeit']) {
+                            echo '<td></td>';
+                            $setDienstag = 1;
+                        }
+                        echo '<td>' . $row['Inhalt'] . '</td>';
+                        $setMittwoch = 1;
+                    } elseif ($row['Tag'] == $donnerstag && $setDonnerstag != 1) {
+                        if ($setMontag == 0 && $lasttime == $row['Zeit']) {
+                            echo '<td></td>';
+                            $setMontag = 1;
+                        }
+                        if ($setDienstag == 0 && $lasttime == $row['Zeit']) {
+                            echo '<td></td>';
+                            $setDienstag = 1;
+                        }
+                        if ($setMittwoch == 0 && $lasttime == $row['Zeit']) {
+                            echo '<td></td>';
+                            $setMittwoch = 1;
+                        }
+                        echo '<td>' . $row['Inhalt'] . '</td>';
+                        $setDonnerstag = 1;
+                    } elseif ($row['Tag'] == $freitag && $setFreitag != 1) {
+                        if ($setMontag == 0 && $lasttime == $row['Zeit']) {
+                            echo '<td></td>';
+                            $setMontag = 1;
+                        }
+                        if ($setDienstag == 0 && $lasttime == $row['Zeit']) {
+                            echo '<td></td>';
+                            $setDienstag = 1;
+                        }
+                        if ($setMittwoch == 0 && $lasttime == $row['Zeit']) {
+                            echo '<td></td>';
+                            $setMittwoch = 1;
+                        }
+                        if ($setDonnerstag == 0 && $lasttime == $row['Zeit']) {
+                            echo '<td></td>';
+                            $setDonnerstag = 1;
+                        }
+                        echo '<td>' . $row['Inhalt'] . '</td>';
+                        $setFreitag = 1;
+                    } else
+                        echo '<td></td>';
+
+                    $lasttime = $row['Zeit'];
+
+                }
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+        echo '</tbody>
+        </table>
+        </div>';
+    } elseif ($this->mode == 2) {
             $tbl_name = $this->user->getName() . "_planer";
             echo '<h2 class="sub-header"> Planer ' . $this->user->getName() . ' (' . $week . '. Kalenderwoche) </h2>
         <div class="table-responsive">
