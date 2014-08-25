@@ -2,12 +2,12 @@
 <?php
 require_once 'functions.inc.php';
 require_once DIR_ROOT . '/classes/user.class.php';
-$date = date('D d.F.Y', time());
-$week = date('W', time());
-$year = date('Y', time());
+//$date = date('D d.F.Y', time());
+$week = isset($_REQUEST['week']) && is_numeric($_REQUEST['week']) ? sprintf('%02d', $_REQUEST['week']) : date('W', time());
+$year = isset($_REQUEST['year']) && is_numeric($_REQUEST['year']) ? sprintf('%04d', $_REQUEST['year']) : date('Y', time());
 $class = $user -> getClass();
 $mode = 0;
- 
+
 $user->sessionCheck();
  
 if(isset($_POST['login'])) { // Pressed login button
@@ -32,7 +32,7 @@ if(isset($_GET['a']) && $_GET['a'] == 'logout') { // Log out
                 <meta name="viewport" content="width=device-width, initial-scale=1">
                 <?php
                 if ($mode == 1)
-                        echo '<title> Vertretungsplan' . $class . ' vom ' . $date . ' </title>';
+                    echo '<title> Vertretungsplan' . $class . ' (' . $week . '. Kalenderwoche) </title>';
                 elseif ($mode == 4)
                     echo '<title> Aufgaben ' . $class . ' (' . $week . '. Kalenderwoche) </title>';
                 elseif ($mode == 0)

@@ -1,5 +1,6 @@
 <?php
-
+//glyphicon glyphicon-chevron-left
+//
 class Calendar
 {
     private $user = '';
@@ -24,7 +25,7 @@ class Calendar
         $days = array();
 
         for ($i = 0; $i < 5; $i++)
-            $days[] = array("weekday" => strftime('%A', $stamp + 24 * 60 * 60 * $i),"pretty" => strftime('%A, %d.%m.', $stamp + 24 * 60 * 60 * $i), "date" => strftime('%Y-%m-%d', $stamp + 24 * 60 * 60 * $i));
+            $days[] = array("weekday" => strftime('%A', $stamp + 24 * 60 * 60 * $i), "pretty" => strftime('%A, %d.%m.', $stamp + 24 * 60 * 60 * $i), "date" => strftime('%Y-%m-%d', $stamp + 24 * 60 * 60 * $i));
 
         $tbl_name_class = $this->user->getClass() . "_planer";
         $tbl_name_user = $this->user->getName() . "_planer";
@@ -103,9 +104,18 @@ class Calendar
             case 3:
             case 4:
 
+            $nextStamp = strtotime("+13 days", $stamp); //hacking cause php things (wrong year)
+            $prevStamp = strtotime("-7 days", $stamp);
 
-                echo '<h2 class="sub-header"> Aufgaben ';
-
+            ?>
+            <h2 class="sub-header">
+                <button
+                    onclick="window.document.location='<?= $_SERVER['PHP_SELF'] ?>?week=<?= date("W", $prevStamp) ?>&year=<?= date("Y", $prevStamp) ?>';"
+                    type="button" class="btn">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </button>
+                Aufgaben
+                <?php
                 switch ($this->mode) {
                     case 2:
                         echo $this->user->getName();
@@ -120,13 +130,20 @@ class Calendar
                         $sql = "SELECT Zeit, Tag, GROUP_CONCAT(Inhalt SEPARATOR '\n') as Inhalt FROM ((SELECT * FROM `" . $tbl_name_class . "`s) UNION (SELECT * FROM `" . $tbl_name_user . "`s)) as a  GROUP BY Zeit, Tag ORDER BY Zeit, Tag;";
                         break;
                 }
-
-            echo ' (KW ' . $week . ') </h2>
-        <div class="table-responsive">
-        <table class="table table-striped">
-        <thead>
-        <tr>
-        <th>Zeit</th>';
+                ?>
+                (KW <?= $week ?>)
+                <button
+                    onclick="window.document.location='<?= $_SERVER['PHP_SELF'] ?>?week=<?= date("W", $nextStamp) ?>&year=<?= date("Y", $nextStamp) ?>';"
+                    type="button" class="btn">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </button>
+            </h2>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                    <th>Zeit</th>
+            <?php
                 foreach ($days as $day)
                     echo '<th>' . $day["pretty"] . '</th>';
                 echo '</tr>
