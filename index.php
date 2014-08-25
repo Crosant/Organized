@@ -16,7 +16,7 @@ for($i = 0; $i < 12; $i++)
     if($i == 5 || $i == 6)
         continue;
 
-    $daten[date('Y-m-d', $stamp + 24 * 60 * 60 * $i)] = date('l, d.m.', $stamp + 24 * 60 * 60 * $i);
+    $daten[strftime('%Y-%m-%d', $stamp + 24 * 60 * 60 * $i)] = strftime('%A, %d.%m.', $stamp + 24 * 60 * 60 * $i);
 }
 
 $calendar = new Calendar($pdo, $user, 4);

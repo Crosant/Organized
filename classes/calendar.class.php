@@ -23,10 +23,8 @@ class Calendar
         $stamp = getStampFromWeek($week, $year);
         $days = array();
 
-        $day_names = array("Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag");
-
         for ($i = 0; $i < 5; $i++)
-            $days[] = array("pretty" => $day_names[$i] . date(' d.m.', $stamp + 24 * 60 * 60 * $i), "date" => date('Y-m-d', $stamp + 24 * 60 * 60 * $i));
+            $days[] = array("weekday" => strftime('%A', $stamp + 24 * 60 * 60 * $i),"pretty" => strftime('%A, %d.%m.', $stamp + 24 * 60 * 60 * $i), "date" => strftime('%Y-%m-%d', $stamp + 24 * 60 * 60 * $i));
 
         $tbl_name_class = $this->user->getClass() . "_planer";
         $tbl_name_user = $this->user->getName() . "_planer";
