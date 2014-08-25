@@ -13,7 +13,7 @@ if ($user->getLoggedIn() && $user->isAdmin()) {
     if (isset($_REQUEST['insert'])) {
         $data = $_REQUEST['user'];
 
-        User::createUser($pdo, $data["username"], $data["password"], $data["class"]);
+        $error = User::createUser($pdo, $data["username"], $data["password"], $data["class"]);
     }
 
     if (isset($_REQUEST['migrateUsers'])) {
@@ -25,6 +25,11 @@ if ($user->getLoggedIn() && $user->isAdmin()) {
         foreach ($results as $user) {
             User::createUserTables($pdo, $user["username"], $user["class"]);
         }
+    }
+
+    if(!empty($error))
+    {
+        echo "<script type='text/javascript'>window.alert('{$error}');</script>";
     }
 
     ?>
