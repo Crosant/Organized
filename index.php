@@ -1,6 +1,7 @@
 <?php
 session_start();
 define('DIR_ROOT', dirname(__FILE__) . '/');
+require_once DIR_ROOT . 'inc/data.inc.php';
 require_once DIR_ROOT . 'inc/sql.inc.php';
 require_once DIR_ROOT . 'classes/user.class.php';
 $user = new User($pdo);
@@ -18,9 +19,8 @@ for($i = 0; $i < 12; $i++)
     $daten[date('Y-m-d', $stamp + 24 * 60 * 60 * $i)] = date('l, d.m.', $stamp + 24 * 60 * 60 * $i);
 }
 
-$calendar = new Calendar($pdo, $user, 3 + $class);
+$calendar = new Calendar($pdo, $user, 0);
 $calendar->show();
-$zeiten = array("07:45 - 08:30", "08:40 - 09:25", "09:35 - 10:20", "10:35 - 11:20", "11:30 - 12:15", "12:25 - 13:10", "13:20 - 14:05", "14:15 - 15:00", "15:10 - 15:55", "16:05 - 16:50");
 if (isset($_POST['insertB']) && $user->getLoggedIn()) { // Pressed insert button
     if (isset($_POST['insert']['class'])) {
         $tbl_name = $user->getClass() . "_planer";
