@@ -15,9 +15,9 @@ if(isset($_POST['login'])) { // Pressed login button
 }
  
 if(isset($_GET['a']) && $_GET['a'] == 'logout') { // Log out
+    $user->logout();
     unset($_SESSION['loggedIn']);
     session_destroy();
-        $user->logout();
 }
  
 ?>

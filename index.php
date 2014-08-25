@@ -19,7 +19,7 @@ for($i = 0; $i < 12; $i++)
     $daten[date('Y-m-d', $stamp + 24 * 60 * 60 * $i)] = date('l, d.m.', $stamp + 24 * 60 * 60 * $i);
 }
 
-$calendar = new Calendar($pdo, $user, 0);
+$calendar = new Calendar($pdo, $user, 4);
 $calendar->show();
 if (isset($_POST['insertB']) && $user->getLoggedIn()) { // Pressed insert button
     if (isset($_POST['insert']['class'])) {
