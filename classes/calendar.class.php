@@ -121,7 +121,7 @@ class Calendar
                         break;
                 }
 
-                echo ' (KW. ' . $week . ') </h2>
+            echo ' (KW ' . $week . ') </h2>
         <div class="table-responsive">
         <table class="table table-striped">
         <thead>

@@ -33,8 +33,8 @@ if(isset($_GET['a']) && $_GET['a'] == 'logout') { // Log out
                 <?php
                 if ($mode == 1)
                         echo '<title> Vertretungsplan' . $class . ' vom ' . $date . ' </title>';
-                elseif ($mode == 2)
-                        echo '<title> Aufgaben ' . $class . ' (' . $week . '. Kalenderwoche) </title>';
+                elseif ($mode == 4)
+                    echo '<title> Aufgaben ' . $class . ' (' . $week . '. Kalenderwoche) </title>';
                 elseif ($mode == 0)
                         echo '<title> Stundenplan ' . $class . ' (' . $week . '. Kalenderwoche) </title>';
                 ?>
@@ -65,7 +65,7 @@ if(isset($_GET['a']) && $_GET['a'] == 'logout') { // Log out
                                                 <span class="icon-bar"></span>
                                                 <span class="icon-bar"></span>
                                         </button>
-                                        <a class="navbar-brand" href="">Aufgaben</a>
+                                    <a class="navbar-brand" href="index.php">Aufgaben</a>
                                 </div>
                                 <div class="navbar-collapse collapse">
                                         <ul class="nav navbar-nav">
