@@ -6,6 +6,17 @@ class Calendar
     private $mode = '';
     private $pdo = null;
 
+    private static function comparator($a, $b)
+    {
+        if($a["Zeit"] != $b["Zeit"])
+            return ($a["Zeit"] < $b["Zeit"]) ? -1 : 1;
+
+        if($a["Tag"] != $b["Tag"])
+            return ($a["Tag"] < $b["Tag"]) ? -1 : 1;
+
+        return 0;
+    }
+
     public function __construct($pdo, $user, $mode)
     {
         $this->pdo = $pdo;
@@ -48,6 +59,7 @@ class Calendar
                 $stmt->execute();
                 $stmt2 = $this->pdo->prepare($sql2);
                 $stmt2->execute();
+
                 $results = array_merge($stmt->fetchAll(PDO::FETCH_ASSOC), $stmt2->fetchAll(PDO::FETCH_ASSOC));
                 $stamp = getStampFromWeek($week, $year);
                 $montag = date('Y-m-d', $stamp);
@@ -62,7 +74,7 @@ class Calendar
                 $setDonnerstag = 0;
                 $setFreitag = 0;
                 $firstRun = 1;
-                array_multisort($results);
+                usort($results, "Calendar::comparator");
                 foreach ($results as $row) {
                     array_walk_recursive($row, 'encode_items');
                     if ($row['Tag'] == $montag || $row['Tag'] == $dienstag || $row['Tag'] == $mittwoch || $row['Tag'] == $donnerstag || $row['Tag'] == $freitag) {
