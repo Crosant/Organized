@@ -11,7 +11,11 @@ $mode = 0;
 $user->sessionCheck();
  
 if(isset($_POST['login'])) { // Pressed login button
-        $user->login($_POST['user']['username'], $_POST['user']['password']);
+    $user->login($_POST['user']['username'], $_POST['user']['password']);
+    if (!empty($_POST['user']['remember_me'])) {
+        setcookie("SESSION_UNAME", $_POST['user']['username'], 60 * 60 * 24 * 365);
+        setcookie("SESSION_PASSWD", $_POST['user']['password'], 60 * 60 * 24 * 365);
+    }
 }
  
 if(isset($_GET['a']) && $_GET['a'] == 'logout') { // Log out
@@ -79,8 +83,8 @@ if(isset($_GET['a']) && $_GET['a'] == 'logout') { // Log out
                                                                                 <form action="' . $_SERVER['PHP_SELF'] . '" method="post" accept-charset="UTF-8">
                                                                                         <input id="username" style="margin: 5px; margin-bottom: 15px;" type="text" name="user[username]" placeholder="Username" size="30" />
                                                                                         <input id="password" style="margin: 5px; margin-bottom: 15px;" type="password" name="user[password]" placeholder="Password" size="30" />
-                                                                                        <!--<input id="remember_me" style="float: left; margin-right: 10px;" type="checkbox" name="user[remember_me]" value="1" />
-                                                                                        <label class="string optional" for="user_remember_me"> Remember me</label>-->
+                                                                                        <input id="remember_me" style="margin: 5px; margin-right: 10px;" type="checkbox" name="user[remember_me]" value="1" />
+                                                                                        <label class="string optional" for="remember_me"> Remember me</label>
  
                                                                                         <input class="btn btn-primary" style="margin: 5px; clear: left; width: 96%; height: 32px; font-size: 13px;" type="submit" name="login" value="Login" />
                                                                                 </form>

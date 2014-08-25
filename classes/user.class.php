@@ -122,6 +122,11 @@ class User
 
     public function login($username, $password)
     {
+        return $this->loginRaw($username, md5($password));
+    }
+
+    public function loginRaw($username, $password)
+    {
         try {
             $sql = 'SELECT * FROM `users` WHERE username = :1;';
             $stmt = $this->pdo->prepare($sql);
@@ -134,7 +139,7 @@ class User
             }
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            if ($results[0]['password'] == md5($password)) { // Logged in
+            if ($results[0]['password'] == $password) { // Logged in
                 $this->LoggedIn = true;
                 $this->setName($username);
                 $this->setClass($results[0]['class']);
@@ -155,8 +160,6 @@ class User
         }
 
         return false;
-
-        //return $this->LoggedIn = true;
     }
 
     public function sessionCheck()
@@ -165,6 +168,8 @@ class User
             $this->LoggedIn = true;
             $this->setName($_SESSION['username']);
             $this->setClass($_SESSION['class']);
+        } else if (isset($_COOKIE["SESSION_UNAME"]) && isset($_COOKIE["SESSION_PASSWD"])) {
+            $this->loginRaw($_COOKIE["SESSION_UNAME"], $_COOKIE["SESSION_PASSWD"]);
         }
     }
 
