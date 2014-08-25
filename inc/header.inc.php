@@ -61,7 +61,7 @@ if(isset($_GET['a']) && $_GET['a'] == 'logout') { // Log out
                                                 <span class="icon-bar"></span>
                                                 <span class="icon-bar"></span>
                                         </button>
-                                        <a class="navbar-brand" href="">Planer</a>
+                                        <a class="navbar-brand" href="">Aufgaben</a>
                                 </div>
                                 <div class="navbar-collapse collapse">
                                         <ul class="nav navbar-nav">

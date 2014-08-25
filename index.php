@@ -7,35 +7,75 @@ $user = new User($pdo);
 include 'inc/header.inc.php';
 include 'classes/calendar.class.php';
 $class = 1;
-$calendar = new Calendar($pdo, $user, 3+$class);
-$calendar->show();
-if(isset($_POST['insertB']) && $user->getLoggedIn()) { // Pressed insert button
-    if( $_POST['insert']['class']){
+$stamp = getStampFromWeek($week, $year);
+$montag = "Montag, " . date('d.m.', $stamp);
+$dienstag = "Dienstag ." . date('d.m.', $stamp + 24 * 60 * 60);
+$mittwoch = "Mittwoch ." . date('d.m.', $stamp + 24 * 60 * 60 * 2);
+$donnerstag = "Donenrstag ." . date('d.m.', $stamp + 24 * 60 * 60 * 3);
+$freitag =  "Freitag ." . date('d.m.', $stamp + 24 * 60 * 60 * 4);
+$montag2 = "Montag, " . date('d.m.', $stamp);
+$dienstag2 = "Dienstag ." . date('d.m.', $stamp + 24 * 60 * 60 * 7);
+$mittwoch2 = "Mittwoch ." . date('d.m.', $stamp + 24 * 60 * 60 * 8);
+$donnerstag2 = "Donenrstag ." . date('d.m.', $stamp + 24 * 60 * 60 * 9);
+$freitag2 = "Freitag ." . date('d.m.', $stamp + 24 * 60 * 60 * 10);
+$daten = array();
+
+$calendar = new Calendar($pdo, $user, 3 + $class);
+$calendar->show($montag, $dienstag, $mittwoch, $donnerstag, $freitag, $montag2, $dienstag2, $mittwoch2, $donnerstag2, $freitag2);
+$zeiten = array("07:45 - 08:30", "08:40 - 09:25", "09:35 - 10:20", "10:35 - 11:20", "11:30 - 12:15", "12:25 - 13:10", "13:20 - 14:05", "14:15 - 15:00", "15:10 - 15:55", "16:05 - 16:50");
+if (isset($_POST['insertB']) && $user->getLoggedIn()) { // Pressed insert button
+    if ($_POST['insert']['class']) {
         $tbl_name = $user->getClass() . "_planer";
-    }
-    else {
+    } else {
         $tbl_name = $user->getName() . "_planer";
     }
     $sql = "INSERT INTO " . $tbl_name . " (Tag,Zeit,Inhalt) VALUES (:1,:2,:3)";
     $q = $pdo->prepare($sql);
     $q->execute(array(':1' => $_POST['insert']['date'],
-                       ':2' => $_POST['insert']['time'],
-                        ':3' => $_POST['insert']['thing']));
+        ':2' => $_POST['insert']['time'],
+        ':3' => $_POST['insert']['thing']));
     header("Refresh:0");
 }
-if($user->getLoggedIn()){
-echo '
-    <form action="' . $_SERVER['PHP_SELF'] . '" method="post" accept-charset="UTF-8">
-        <input id="date" style="margin: 5px; margin-bottom: 15px;" type="text" name="insert[date]"
-               placeholder="Tag YYYY-MM-DD" size="30"/>
-        <input id="time" style="margin: 5px; margin-bottom: 15px;" type="text" name="insert[time]"
-               placeholder="Zeit eg. 00:00-20:30" size="30"/>
-        <input id="thing" style="margin: 5px; margin-bottom: 15px;" type="text" name="insert[thing]"
-               placeholder="Inhalt" size="30"/>
-        <input id="class" style=" margin-right: 10px;" type="checkbox" name="insert[class]" value="1" /> Klasse?
-        <input class="btn btn-primary" style="margin: 5px; clear: left; width: 96%; height: 32px; font-size: 13px;"
-               type="submit" name="insertB" value="Insert"/>
-    </form> ';
+if ($user->getLoggedIn()) {
+    if (extendet) {
+        echo '
+            <form action="' . $_SERVER['PHP_SELF'] . '" method="post" accept-charset="UTF-8">
+            <input id="date" style="margin: 5px; margin-bottom: 15px;" type="text" name="insert[date]"
+                  placeholder="Datum" size="30"/>
+         <input id="time" style="margin: 5px; margin-bottom: 15px;" type="text" name="insert[time]"
+                  placeholder="Zeit" size="30"/>
+          <input id="thing" style="margin: 5px; margin-bottom: 15px;" type="text" name="insert[thing]"
+                   placeholder="Aufgabe" size="30"/>
+           <input id="class" style=" margin-right: 10px;" type="checkbox" name="insert[class]" value="1" /> ganze Klasse?
+           <input class="btn btn-primary" style="margin: 5px; clear: left; width: 96%; height: 32px; font-size: 13px;"
+                   type="submit" name="insertB" value="Aufgabe eintragen"/>
+        </form> ';
+    } else {
+        echo '
+        <form action="' . $_SERVER['PHP_SELF'] . '" method="post" accept-charset="UTF-8">
+            <select name="insert[date]">
+            ';
+
+        foreach ($daten as $i) {
+            echo '<option value="' . $i . '">' . $i . '</option>';
+        }
+        echo '
+            </select>
+            <select name="insert[time]">
+            ';
+
+        foreach ($zeiten as $i) {
+            echo '<option value="' . $i . '">' . $i . '</option>';
+        }
+        echo '
+        </select>
+        '.'<input id="thing" style="margin: 5px; margin-bottom: 15px;" type="text" name="insert[thing]"
+                   placeholder="Aufgabe" size="30"/>
+           <input id="class" style=" margin-right: 10px;" type="checkbox" name="insert[class]" value="1" /> ganze Klasse?
+           <input class="btn btn-primary" style="margin: 5px; clear: left; width: 96%; height: 32px; font-size: 13px;"
+                   type="submit" name="insertB" value="Aufgabe eintragen"/>
+        </form> ';
+    }
 }
 include 'inc/footer.inc.php';
 
