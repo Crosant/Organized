@@ -10,7 +10,7 @@ class User
     public function __construct($pdo)
     {
         $this->pdo = $pdo;
-        $this->setName("Guest");
+        $this->setName("guest");
         $this->setClass("example");
         $this->logout();
     }
@@ -158,7 +158,7 @@ class User
                 $this->setClass($results[0]['class']);
 
                 $_SESSION['loggedIn'] = true;
-                $_SESSION['username'] = $username;
+                $_SESSION['username'] = strtolower($username);
                 $_SESSION['class'] = $results[0]['class'];
                 $_SESSION['admin'] = $results[0]['admin'];
                 return true;
