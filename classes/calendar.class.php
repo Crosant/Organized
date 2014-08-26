@@ -199,7 +199,7 @@ class Calendar
                         ?>
                         <td><?= $row['Inhalt'] ?>
                             <button
-                                onclick="window.document.location='<?= $_SERVER['PHP_SELF'] ?>?week=<?= $week ?>&year=<?= $year ?>&date=<?= $row['Tag'] ?>&time=<?= $row['Zeit'] ?>&delete';"
+                                onclick="if(window.confirm('Bist du sicher?')) window.document.location='<?= $_SERVER['PHP_SELF'] ?>?week=<?= $week ?>&year=<?= $year ?>&date=<?= $row['Tag'] ?>&time=<?= $row['Zeit'] ?>&delete';"
                                 type="button" class="btn">
                                 <span class="glyphicon glyphicon-remove"></span>
                             </button>
