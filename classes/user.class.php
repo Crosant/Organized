@@ -179,7 +179,7 @@ class User
     {
         if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true) {
             $this->LoggedIn = true;
-            $this->setName($_SESSION['username']);
+            $this->setName(strtolower($_SESSION['username']));
             $this->setClass($_SESSION['class']);
         } else if (isset($_COOKIE["SESSION_UNAME"]) && isset($_COOKIE["SESSION_PASSWD"])) {
             $this->loginRaw($_COOKIE["SESSION_UNAME"], $_COOKIE["SESSION_PASSWD"]);
