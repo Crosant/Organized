@@ -2,7 +2,7 @@
 <div id="footer">
         <div class="container">
                 <p class="text-muted">
-                    &copy;2014 Florian Reichmuth & Julian D&ouml;rfler Idee: David L&ouml;ffler
+                    &copy;2014 Florian Reichmuth & Julian D&ouml;rfler | Idee: David L&ouml;ffler
                 </p>
         </div>
 </div>
