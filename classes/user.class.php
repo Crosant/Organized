@@ -22,8 +22,15 @@ class User
 
     public static function createUser($pdo, $username, $password, $class)
     {
-        $username = str_replace($username, "`", "");
-        $class = str_replace($class, "`", "");
+        if (empty($password))
+            return "Supply a password";
+        return User::createUserRaw($pdo, $username, md5($password), $class);
+    }
+
+    public static function createUserRaw($pdo, $username, $password, $class)
+    {
+        $username = str_replace("`", "", $username);
+        $class = str_replace("`", "", $class);
 
         if (empty($username))
             return "Supply a username";
@@ -34,21 +41,18 @@ class User
         if (empty($class))
             return "Supply a class";
 
-        $password = md5($password);
-
         try {
-            $sql = 'SELECT count(*) FROM `users` WHERE username = :1 OR class = :1 OR username = :2;';
+            $sql = 'SELECT * FROM `users` WHERE username = :1 OR class = :1 OR username = :2;';
             $stmt = $pdo->prepare($sql);
             $stmt->execute(array(":1" => $username, ":2" => $class));
 
             if ($stmt->rowCount() == 0) { // No such user
-                $sql = 'INSERT INTO `users` (`username`, `password`, `class`) VALUES (":1", ":2", ":3");';
+                $sql = 'INSERT INTO `users` (`username`, `password`, `class`) VALUES (:1, :2, :3);';
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute(array(":1" => $username, ":2" => $password, ":3" => $class));
 
-                createUserTables($pdo, $username, $class);
-            }
-            else
+                User::createUserTables($pdo, $username, $class);
+            } else
                 return "Username or Class already in use";
 
         } catch (PDOException $e) {

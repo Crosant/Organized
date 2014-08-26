@@ -1,6 +1,5 @@
 <?php
-//glyphicon glyphicon-chevron-left
-//
+
 class Calendar
 {
     private $user = '';
@@ -103,47 +102,58 @@ class Calendar
             case 2:
             case 3:
             case 4:
+                if ($this->user->getLoggedIn() && isset($_REQUEST['delete']) && !empty($_REQUEST['date']) && !empty($_REQUEST['time'])) {
+                    if ($this->mode != 2) {
+                        $sql = "DELETE FROM `" . $tbl_name_class . "` WHERE Zeit = :1 AND Tag = :2;";
+                        $this->pdo->prepare($sql)->execute(array(":1" => $_REQUEST['time'], ":2" => $_REQUEST['date']));
+                    }
+                    if ($this->mode != 3) {
+                        $sql = "DELETE FROM `" . $tbl_name_user . "` WHERE Zeit = :1 AND Tag = :2;";
+                        $this->pdo->prepare($sql)->execute(array(":1" => $_REQUEST['time'], ":2" => $_REQUEST['date']));
+                    }
 
-            $nextStamp = strtotime("+13 days", $stamp); //hacking cause php things (wrong year)
-            $prevStamp = strtotime("-7 days", $stamp);
-
-            ?>
-            <h2 class="sub-header">
-                <button
-                    onclick="window.document.location='<?= $_SERVER['PHP_SELF'] ?>?week=<?= date("W", $prevStamp) ?>&year=<?= date("Y", $prevStamp) ?>';"
-                    type="button" class="btn">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                </button>
-                Aufgaben
-                <?php
-                switch ($this->mode) {
-                    case 2:
-                        echo $this->user->getName();
-                        $sql = "SELECT Zeit, Tag, GROUP_CONCAT(Inhalt SEPARATOR '\n') as Inhalt FROM (SELECT * FROM `" . $tbl_name_user . "`s) as a  GROUP BY Zeit, Tag ORDER BY Zeit, Tag;";
-                        break;
-                    case 3:
-                        echo $this->user->getClass();
-                        $sql = "SELECT Zeit, Tag, GROUP_CONCAT(Inhalt SEPARATOR '\n') as Inhalt FROM (SELECT * FROM `" . $tbl_name_class . "`s) as a  GROUP BY Zeit, Tag ORDER BY Zeit, Tag;";
-                        break;
-                    case 4:
-                        echo $this->user->getName() . ' / ' . $this->user->getClass();
-                        $sql = "SELECT Zeit, Tag, GROUP_CONCAT(Inhalt SEPARATOR '\n') as Inhalt FROM ((SELECT * FROM `" . $tbl_name_class . "`s) UNION (SELECT * FROM `" . $tbl_name_user . "`s)) as a  GROUP BY Zeit, Tag ORDER BY Zeit, Tag;";
-                        break;
                 }
+
+                $nextStamp = strtotime("+13 days", $stamp); //hacking cause php things (wrong year)
+                $prevStamp = strtotime("-7 days", $stamp);
+
                 ?>
-                (KW <?= $week ?>)
-                <button
-                    onclick="window.document.location='<?= $_SERVER['PHP_SELF'] ?>?week=<?= date("W", $nextStamp) ?>&year=<?= date("Y", $nextStamp) ?>';"
-                    type="button" class="btn">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                </button>
-            </h2>
-            <div class="table-responsive">
+                <h2 class="sub-header">
+                    <button
+                        onclick="window.document.location='<?= $_SERVER['PHP_SELF'] ?>?week=<?= date("W", $prevStamp) ?>&year=<?= date("Y", $prevStamp) ?>';"
+                        type="button" class="btn">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </button>
+                    Aufgaben
+                    <?php
+                    switch ($this->mode) {
+                        case 2:
+                            echo $this->user->getName();
+                            $sql = "SELECT Zeit, Tag, GROUP_CONCAT(Inhalt SEPARATOR '\n') as Inhalt FROM (SELECT * FROM `" . $tbl_name_user . "`s) as a  GROUP BY Zeit, Tag ORDER BY Zeit, Tag;";
+                            break;
+                        case 3:
+                            echo $this->user->getClass();
+                            $sql = "SELECT Zeit, Tag, GROUP_CONCAT(Inhalt SEPARATOR '\n') as Inhalt FROM (SELECT * FROM `" . $tbl_name_class . "`s) as a  GROUP BY Zeit, Tag ORDER BY Zeit, Tag;";
+                            break;
+                        case 4:
+                            echo $this->user->getName() . ' / ' . $this->user->getClass();
+                            $sql = "SELECT Zeit, Tag, GROUP_CONCAT(Inhalt SEPARATOR '\n') as Inhalt FROM ((SELECT * FROM `" . $tbl_name_class . "`s) UNION (SELECT * FROM `" . $tbl_name_user . "`s)) as a  GROUP BY Zeit, Tag ORDER BY Zeit, Tag;";
+                            break;
+                    }
+                    ?>
+                    (KW <?= $week ?>)
+                    <button
+                        onclick="window.document.location='<?= $_SERVER['PHP_SELF'] ?>?week=<?= date("W", $nextStamp) ?>&year=<?= date("Y", $nextStamp) ?>';"
+                        type="button" class="btn">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </button>
+                </h2>
+                <div class="table-responsive">
                 <table class="table table-striped">
-                    <thead>
-                    <tr>
-                    <th>Zeit</th>
-            <?php
+                <thead>
+                <tr>
+                <th>Zeit</th>
+                <?php
                 foreach ($days as $day)
                     echo '<th>' . $day["pretty"] . '</th>';
                 echo '</tr>
@@ -186,8 +196,15 @@ class Calendar
                             echo '<td></td>';
                             $estNext++;
                         }
-
-                        echo '<td>' . $row['Inhalt'] . '</td>';
+                        ?>
+                        <td><?= $row['Inhalt'] ?>
+                            <button
+                                onclick="window.document.location='<?= $_SERVER['PHP_SELF'] ?>?week=<?= $week ?>&year=<?= $year ?>&date=<?= $row['Tag'] ?>&time=<?= $row['Zeit'] ?>&delete';"
+                                type="button" class="btn">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                        </td>
+                        <?php
                         $estNext++;
 
                         $lasttime = $row['Zeit'];

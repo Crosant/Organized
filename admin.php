@@ -13,7 +13,11 @@ if ($user->getLoggedIn() && $user->isAdmin()) {
     if (isset($_REQUEST['insert'])) {
         $data = $_REQUEST['user'];
 
-        $error = User::createUser($pdo, $data["username"], $data["password"], $data["class"]);
+        if (isset($data["md5"])) {
+            $error = User::createUserRaw($pdo, $data["username"], $data["password"], $data["class"]);
+        } else {
+            $error = User::createUser($pdo, $data["username"], $data["password"], $data["class"]);
+        }
     }
 
     if (isset($_REQUEST['migrateUsers'])) {
@@ -27,8 +31,7 @@ if ($user->getLoggedIn() && $user->isAdmin()) {
         }
     }
 
-    if(!empty($error))
-    {
+    if (!empty($error)) {
         echo "<script type='text/javascript'>window.alert('{$error}');</script>";
     }
 
@@ -40,6 +43,7 @@ if ($user->getLoggedIn() && $user->isAdmin()) {
                placeholder="Password" size="30"/>
         <input id="class" style="margin: 5px; margin-bottom: 15px;" type="text" name="user[class]" placeholder="Class"
                size="30"/>
+        <input id="class" style=" margin-right: 10px;" type="checkbox" name="user[md5]" value="1"/> md5?
         <input class="btn btn-primary" style="margin: 5px; clear: left; width: 96%; height: 32px; font-size: 13px;"
                type="submit" name="insert" value="insert"/>
     </form>
