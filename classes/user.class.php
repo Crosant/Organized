@@ -20,14 +20,14 @@ class User
         return $this->LoggedIn = false;
     }
 
-    public static function createUser($pdo, $username, $password, $class)
+    public static function createUser($pdo, $username, $password, $class, $vname, $nname, $mail)
     {
         if (empty($password))
             return "Supply a password";
-        return User::createUserRaw($pdo, $username, md5($password), $class);
+        return User::createUserRaw($pdo, $username, md5($password), $class, $vname, $nname, $mail);
     }
 
-    public static function createUserRaw($pdo, $username, $password, $class)
+    public static function createUserRaw($pdo, $username, $password, $class, $vname, $nname, $mail)
     {
         $username = str_replace("`", "", $username);
         $class = str_replace("`", "", $class);
@@ -41,15 +41,24 @@ class User
         if (empty($class))
             return "Supply a class";
 
+        if (empty($vname))
+            return "Supply a Name";
+
+        if (empty($nname))
+            return "Supply a Surname";
+
+        if (empty($mail))
+            return "Supply a Mail";
+
         try {
             $sql = 'SELECT * FROM `users` WHERE username = :1 OR class = :1 OR username = :2;';
             $stmt = $pdo->prepare($sql);
             $stmt->execute(array(":1" => $username, ":2" => $class));
 
             if ($stmt->rowCount() == 0) { // No such user
-                $sql = 'INSERT INTO `users` (`username`, `password`, `class`) VALUES (:1, :2, :3);';
+                $sql = 'INSERT INTO `users` (`username`, `password`, `class`,`vorname`, `nachname`, `mail` ) VALUES (:1, :2, :3, :4, :5, :6);';
                 $stmt = $pdo->prepare($sql);
-                $stmt->execute(array(":1" => $username, ":2" => $password, ":3" => $class));
+                $stmt->execute(array(":1" => $username, ":2" => $password, ":3" => $class, ":4" => $vname, ":5" => $nname, ":6" => $mail));
 
                 User::createUserTables($pdo, $username, $class);
             } else

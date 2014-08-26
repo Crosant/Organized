@@ -82,9 +82,9 @@ if (isset($_GET['a']) && $_GET['a'] == 'logout') { // Log out
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <!--                                               <a class="navbar-brand" href="#">Stundenplan</a>
-                                                               <a class="navbar-brand" href="#">Vertretungsplan</a>
-                --->
+                <!--                                              <a class="navbar-brand" href="stundenplan.html">Stundenplan</a>
+                                                             <a class="navbar-brand" href="#">Vertretungsplan</a>
+               --->
             </ul>
             <?php
 

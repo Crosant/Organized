@@ -14,9 +14,9 @@ if ($user->getLoggedIn() && $user->isAdmin()) {
         $data = $_REQUEST['user'];
 
         if (isset($data["md5"])) {
-            $error = User::createUserRaw($pdo, $data["username"], $data["password"], $data["class"]);
+            $error = User::createUserRaw($pdo, $data["username"], $data["password"], $data["class"], $data["vname"], $data["nname"], $data["mail"]);
         } else {
-            $error = User::createUser($pdo, $data["username"], $data["password"], $data["class"]);
+            $error = User::createUser($pdo, $data["username"], $data["password"], $data["class"], $data["vname"], $data["nname"], $data["mail"]);
         }
     }
 
@@ -42,6 +42,12 @@ if ($user->getLoggedIn() && $user->isAdmin()) {
         <input id="password" style="margin: 5px; margin-bottom: 15px;" type="password" name="user[password]"
                placeholder="Password" size="30"/>
         <input id="class" style="margin: 5px; margin-bottom: 15px;" type="text" name="user[class]" placeholder="Class"
+               size="30"/><br/>
+        <input id="class" style="margin: 5px; margin-bottom: 15px;" type="text" name="user[vname]" placeholder="Name"
+               size="30"/>
+        <input id="class" style="margin: 5px; margin-bottom: 15px;" type="text" name="user[nname]" placeholder="Surname"
+               size="30"/>
+        <input id="class" style="margin: 5px; margin-bottom: 15px;" type="text" name="user[mail]" placeholder="Mail"
                size="30"/>
         <input id="class" style=" margin-right: 10px;" type="checkbox" name="user[md5]" value="1"/> md5?
         <input class="btn btn-primary" style="margin: 5px; clear: left; width: 96%; height: 32px; font-size: 13px;"
