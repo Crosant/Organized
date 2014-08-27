@@ -3,8 +3,8 @@ function encode_items(&$item, $key) {
     if(!is_string($item))
         return;
 
-	$item = utf8_encode($item);
-	$item = htmlentities($item);
+    $item = htmlentities($item);
+    $item = utf8_encode($item);
     $item = nl2br($item);
 }
 
