@@ -19,7 +19,7 @@ class Calendar
         global $week;
         global $date;
         global $year;
-
+        global $zeitenPlan;
         $stamp = getStampFromWeek($week, $year);
         $days = array();
 
@@ -74,7 +74,7 @@ class Calendar
                                 echo '</tr>';
                             echo '<tr> ';
                             echo '<td>' . $row['Stunde'] . '</td>';
-                            echo '<td>' . $zeiten[$row['Stunde'] - 1] . '</td>';
+                            echo '<td>' . $zeitenPlan[$row['Stunde'] - 1] . '</td>';
                         }
                         $lasttime = $row['Stunde'];
 
