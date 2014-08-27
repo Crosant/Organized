@@ -72,8 +72,8 @@ if (isset($_GET['a']) && $_GET['a'] == 'logout') { // Log out
 <body>
 
 <!-- Fixed navbar -->
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -94,8 +94,8 @@ if (isset($_GET['a']) && $_GET['a'] == 'logout') { // Log out
             if (!$user->getLoggedIn()) {
                 echo '<ul class="nav navbar-nav navbar-right">
                                                                 <li class="dropdown">
-                                                                        <a class="dropdown-toggle" href="#">Login</a>
-                                                                        <div class="dropdown-menu">
+                                                                        <a class="dropdown-toggle" href="#" data-toggle="dropdown">Login</a>
+                                                                        <ul class="dropdown-menu">
                                                                                 <form action="' . $_SERVER['PHP_SELF'] . '" method="post" accept-charset="UTF-8">
                                                                                         <input id="username" style="margin: 5px; margin-bottom: 15px;" type="text" name="user[username]" placeholder="Username" size="30" />
                                                                                         <input id="password" style="margin: 5px; margin-bottom: 15px;" type="password" name="user[password]" placeholder="Password" size="30" />
@@ -104,7 +104,7 @@ if (isset($_GET['a']) && $_GET['a'] == 'logout') { // Log out
  
                                                                                         <input class="btn btn-primary" style="margin: 5px; clear: left; width: 96%; height: 32px; font-size: 13px;" type="submit" name="login" value="Login" />
                                                                                 </form>
-                                                                        </div>
+                                                                        </ul>
                                                                 </li>
                                                            </ul>';
             } else {
@@ -120,7 +120,7 @@ if (isset($_GET['a']) && $_GET['a'] == 'logout') { // Log out
         </div>
         <!--/.nav-collapse -->
     </div>
-</div>
+</nav>
 <div class="container">
     <div class="wrap">
         <!-- Main component for a primary marketing message or call to action -->
