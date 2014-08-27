@@ -6,8 +6,11 @@ require_once DIR_ROOT . '/classes/user.class.php';
 $week = isset($_REQUEST['week']) && is_numeric($_REQUEST['week']) ? sprintf('%02d', $_REQUEST['week']) : date('W', time());
 $year = isset($_REQUEST['year']) && is_numeric($_REQUEST['year']) ? sprintf('%04d', $_REQUEST['year']) : date('Y', time());
 $class = $user->getClass();
-$mode = 4;
-
+if (isset($_REQUEST['mode']) && is_numeric($_REQUEST['mode'])) {
+    $mode = $_REQUEST['mode'];
+} else {
+    $mode = 4;
+}
 $user->sessionCheck();
 
 if (isset($_POST['login'])) { // Pressed login button
@@ -82,8 +85,8 @@ if (isset($_GET['a']) && $_GET['a'] == 'logout') { // Log out
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <!--                                              <a class="navbar-brand" href="stundenplan.html">Stundenplan</a>
-                                                             <a class="navbar-brand" href="#">Vertretungsplan</a>
+                <a class="navbar-brand" href="?mode=0">Stundenplan</a>
+                <!--                                             <a class="navbar-brand" href="#">Vertretungsplan</a>
                --->
             </ul>
             <?php

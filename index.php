@@ -19,7 +19,7 @@ for($i = 0; $i < 12; $i++)
     $daten[strftime('%Y-%m-%d', $stamp + 24 * 60 * 60 * $i)] = strftime('%A, %d.%m.', $stamp + 24 * 60 * 60 * $i);
 }
 
-$calendar = new Calendar($pdo, $user, 4);
+$calendar = new Calendar($pdo, $user, $mode);
 $calendar->show();
 if (isset($_POST['insertB']) && $user->getLoggedIn()) { // Pressed insert button
     if (isset($_POST['insert']['class'])) {
@@ -34,7 +34,7 @@ if (isset($_POST['insertB']) && $user->getLoggedIn()) { // Pressed insert button
         ':3' => $_POST['insert']['thing']));
     echo '<script type="text/javascript">window.location.href = window.location.href;</script>';
 }
-if ($user->getLoggedIn()) {
+if ($user->getLoggedIn() && $mode != 0 && $mode != 1) {
     if ($extendet) {
         echo '
             <form action="' . $_SERVER['PHP_SELF'] . '?week=' . $week . '&year=' . $year . '" method="post" accept-charset="UTF-8">
