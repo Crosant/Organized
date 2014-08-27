@@ -185,7 +185,7 @@ class Calendar
                         if ($next == -1)
                             continue;
 
-                        if ($lasttime != $row['Zeit']) {
+                        if ($lasttime !== $row['Zeit']) {
                             echo '</tr><tr> ';
                             echo '<td>' . $row['Zeit'] . '</td>';
                             $estNext = 0;

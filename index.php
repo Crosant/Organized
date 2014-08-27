@@ -37,7 +37,7 @@ if (isset($_POST['insertB']) && $user->getLoggedIn()) { // Pressed insert button
 if ($user->getLoggedIn()) {
     if ($extendet) {
         echo '
-            <form action="' . $_SERVER['PHP_SELF'] . '" method="post" accept-charset="UTF-8">
+            <form action="' . $_SERVER['PHP_SELF'] . '?week=' . $week . '&year=' . $year . '" method="post" accept-charset="UTF-8">
             <input id="date" style="margin: 5px; margin-bottom: 15px;" type="text" name="insert[date]"
                   placeholder="Datum" size="30"/>
          <input id="time" style="margin: 5px; margin-bottom: 15px;" type="text" name="insert[time]"
@@ -50,7 +50,7 @@ if ($user->getLoggedIn()) {
         </form> ';
     } else {
         echo '
-        <form action="' . $_SERVER['PHP_SELF'] . '" method="post" accept-charset="UTF-8">
+        <form action="' . $_SERVER['PHP_SELF'] . '?week=' . $week . '&year=' . $year . '" method="post" accept-charset="UTF-8">
             <select name="insert[date]">
             ';
 
