@@ -44,7 +44,7 @@ if ($user->getLoggedIn() && $mode != 0 && $mode != 1) {
                   placeholder="Zeit" size="30"/>
           <input id="thing" style="margin: 5px; margin-bottom: 15px;" type="text" name="insert[thing]"
                    placeholder="Aufgabe" size="30"/>
-           <input id="class" style=" margin-right: 10px;" type="checkbox" name="insert[class]" value="1" /> ganze Klasse?
+           <input id="class" style=" margin-right: 10px;" type="checkbox" name="insert[class]" value="1" checked/> ganze Klasse?
            <input class="btn btn-primary" style="margin: 5px; clear: left; width: 96%; height: 32px; font-size: 13px;"
                    type="submit" name="insertB" value="Aufgabe eintragen"/>
         </form> ';
@@ -69,7 +69,7 @@ if ($user->getLoggedIn() && $mode != 0 && $mode != 1) {
         </select>
         '.'<input id="thing" style="margin: 5px; margin-bottom: 15px;" type="text" name="insert[thing]"
                    placeholder="Aufgabe" size="30"/>
-           <input id="class" style=" margin-right: 10px;" type="checkbox" name="insert[class]" value="1" /> ganze Klasse?
+           <input id="class" style=" margin-right: 10px;" type="checkbox" name="insert[class]" value="1" checked/> ganze Klasse?
            <input class="btn btn-primary" style="margin: 5px; clear: left; width: 96%; height: 32px; font-size: 13px;"
                    type="submit" name="insertB" value="Aufgabe eintragen"/>
         </form> ';

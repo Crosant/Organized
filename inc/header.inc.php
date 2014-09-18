@@ -14,9 +14,9 @@ if (isset($_REQUEST['mode']) && is_numeric($_REQUEST['mode'])) {
 $user->sessionCheck();
 
 if (isset($_POST['login'])) { // Pressed login button
-    $user->login($_POST['user']['username'], $_POST['user']['password']);
+    $user->login(strtolower($_POST['user']['username']), $_POST['user']['password']);
     if (!empty($_POST['user']['remember_me'])) {
-        setcookie("SESSION_UNAME", $_POST['user']['username'], 60 * 60 * 24 * 365);
+        setcookie("SESSION_UNAME", strtolower($_POST['user']['username']), 60 * 60 * 24 * 365);
         setcookie("SESSION_PASSWD", $_POST['user']['password'], 60 * 60 * 24 * 365);
     }
 }
